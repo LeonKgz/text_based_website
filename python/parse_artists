@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+
+import os.path
+
+if os.path.isfile("page.html"):
+  os.remove("page.html")
+
+with open("page.html", "w") as html, open("artists.txt", 'r') as txt:
+  artists = txt.readlines()
+  divslist = ""
+
+  for i in range (1, len(artists)+1):
+    play = artists[i-1]
+    splt = play.split(" - ")
+    artist = splt[0]
+    artist_dir = splt[1][:-1]
+
+    splt = artist.split(" (")
+    artist = splt[0]
+    artist_in_english = splt[1][:-1]
+
+    if (not os.path.exists(f"../{artist_dir}")):
+      try:
+        os.mkdir(f"../{artist_dir}")
+      except OSError:
+        print ("Creation of the directory %s failed" % artist_dir)
+      else:
+        print ("Successfully created the directory %s " % artist_dir)
+
+    divslist += f"""
+  <div class="card" onclick="location.href='../{artist_dir}/page.html';" style="cursor: pointer;">
+    <h2>{artist}</h2>
+    <h3>{artist_in_english}</h3>
+  </div>\n"""
+    if (i % 3 == 0):
+      divslist += """
+</div>
+<div class=\"row\">"""
+
+  html.write(f"""
+<!DOCTYPE html>
+<html lang=\'ru\'>
+  <head>
+    <title>Artists</title>
+    <link rel=\"stylesheet\" href=\"../../styles.css\">
+  </head>
+  <body>
+      <meta charset=utf-8>
+       <center>
+         <h1>Исполнители (Artists)</h1>
+       </center>
+       <center>
+         <div class=\"row\">
+           {divslist}
+         </div>
+       </center>
+  </body>
+  <div class=\"footer\">
+  </div>
+</html>""")
+

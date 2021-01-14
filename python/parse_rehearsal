@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+import os.path
+
+if os.path.isfile("rehearsal.html"):
+  os.remove("rehearsal.html")
+
+with open("rehearsal.html", "w") as html, open("rehearsal.txt", 'r') as txt, open("../menu.html", 'r') as menu:
+  menu = "".join(menu.readlines())
+  title = txt.readline().strip()
+  rehearsal = txt.readlines()[1:]
+  num_roles = len(rehearsal)
+  currmax = 0
+  actors = []
+  names = []
+
+  #    for role in rehearsal:
+  #      splt = role.split(" - ")
+  #      if (splt[0] is "\n"):
+  #        names.append(None)
+  #        actors.append(None)
+  #        continue
+  #      name = splt[0]
+  #      names.append(name)
+  #      actors.append(splt[1])
+  #
+  #      namelen = len(name)
+  #      if (namelen > currmax):
+  #        currmax = namelen
+  #  
+  #    for i in range(num_roles):
+  #      if (names[i] is not None): 
+  #        required_spaces = currmax - len(names[i])
+  #        rehearsal[i] = names[i] + (" " * required_spaces) + " - " + actors[i]
+
+  rehearsal = "".join(rehearsal)
+  html.write(f"""
+<!DOCTYPE html>
+<html lang=\'ru\'>
+  <head>
+    <title>{title}</title>
+    <link rel=\"stylesheet\" href=\"../../styles.css\">
+    <link rel=\"stylesheet\" href=\"../txtstyle.css\">
+  </head>
+  <body>
+      <meta charset=utf-8>
+       <center>
+         <h1>{title}</h1>
+       </center>
+      <div id="mySidenav" class="sidenav">
+         <div class="insidenav">{menu}</div>
+       </div>
+     <div class=\"row\">
+       <div class=\"card\">
+         <h2>Материалы на прогон</h2>
+         <div class=\"textbox\">
+           <p>{rehearsal}</p>
+        </div>
+      </div>
+  </body>
+</html>""")
+

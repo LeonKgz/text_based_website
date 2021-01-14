@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+
+import os.path
+
+if os.path.isfile("song.html"):
+  os.remove("song.html")
+
+with open("song.html", "w") as html, open("original.txt", 'r') as origin, open("interpretation.txt", 'r') as interpret, open("youtube.txt", 'r') as youtube:
+
+  origin_title = origin.readline().strip()
+  original = origin.readlines()[1:]
+
+  interpret_title = interpret.readline().strip()
+  interpret = interpret.readlines()[1:]
+   
+  original = "".join(original)
+  interpret = "".join(interpret)
+
+  youtube = youtube.readline().strip()
+
+  html.write(f"""
+<!DOCTYPE html>
+<html lang=\'ru\'>
+  <head>
+    <title>{origin_title} ({interpret_title})</title>
+    <link rel=\"stylesheet\" href=\"../../../styles.css\">
+    <link rel=\"stylesheet\" href=\"../../txtstyle.css\">
+  </head>
+  <body>
+      <meta charset=utf-8>
+       <center>
+         <h1>{origin_title} ({interpret_title})</h1>
+       </center>
+       <div class="row">
+         <div class="song">
+           <p>{original}</p>
+         </div>
+         <div class="song">
+           <p>{interpret}</p>
+         </div>
+       </div>
+       <div class="row">
+         <div class="video">
+           <iframe width="840" height="447" src="{youtube}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
+       </div>
+  </body>
+</html>""")
+

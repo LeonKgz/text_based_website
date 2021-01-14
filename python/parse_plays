@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import os.path
+
+if os.path.isfile("page.html"):
+  os.remove("page.html")
+
+with open("page.html", "w") as html, open("plays.txt", 'r') as txt:
+  plays = txt.readlines()
+  divslist = ""
+
+  for i in range (1, len(plays)+1):
+    play = plays[i-1]
+    splt = play.split("\" ")
+    playName = splt[0][1:] 
+    # [-1] at the end to remove the newline character, so the html looks nicer
+    playAuthor = splt[1][:-1]
+
+    splt = playAuthor.split(" - ")
+    playAuthor = splt[0]
+    play_directory = splt[1]
+
+    if (not os.path.exists(f"../{play_directory}")):
+      try:
+        os.mkdir(f"../{play_directory}")
+      except OSError:
+        print ("Creation of the directory %s failed" % play_directory)
+      else:
+        print ("Successfully created the directory %s " % play_directory)
+
+    divslist += f"""
+  <div class="card" onclick="location.href='../{play_directory}/roles.html';" style="cursor: pointer;">
+    <h3>{playName}</h2>
+    <h5>{playAuthor}</h5>
+  </div>\n"""
+    if (i % 3 == 0):
+      divslist += """
+</div>
+<div class=\"plays\">"""
+
+  html.write(f"""
+<!DOCTYPE html>
+<html lang=\'ru\'>
+  <head>
+    <title>Plays</title>
+    <link rel=\"stylesheet\" href=\"../../styles.css\">
+    <link rel=\"stylesheet\" href=\"styles.css\">
+  </head>
+  <body>
+      <meta charset=utf-8>
+       <center>
+         <h1>Пьесы</h1>
+       </center>
+       <center>
+         <div class=\"plays\">
+           {divslist}
+         </div>
+       </center>
+  </body>
+  <div class=\"footer\">
+  </div>
+</html>""")
+
