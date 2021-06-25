@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import os.path
+
+if os.path.isfile("index.html"):
+  os.remove("index.html")
+
+with open("index.html", "w") as html, open("original.txt", 'r') as origin, open("interpretation.txt", 'r') as interpret, open("youtube.txt", 'r') as youtube, open("details.txt", 'r') as details, open("russian.txt", 'r') as russian:
+
+  origin_title = origin.readline().strip()
+  original = origin.readlines()[1:]
+
+  russian_title = russian.readline().strip()
+  russian = russian.readlines()[1:]
+
+  interpret_title = interpret.readline().strip()
+  interpret = interpret.readlines()[1:]
+   
+  original = "".join(original)
+  interpret = "".join(interpret)
+  russian = "".join(russian)
+
+  youtube = youtube.readline().strip()
+
+  details = "".join(details.readlines())
+
+  html.write(f"""
+<!DOCTYPE html>
+<html lang=\'ru\'>
+  <head>
+    <title>{origin_title} ({interpret_title})</title>
+    <link rel=\"stylesheet\" href=\"../../../styles.css\">
+    <link rel=\"stylesheet\" href=\"../../txtstyle.css\">
+  </head>
+  <body>
+      <meta charset=utf-8>
+       <center>
+         <h1>{origin_title} ({interpret_title})</h1>
+       </center>
+       <div class="row">
+         <div class="song-container">
+          <div class="song-left">
+           <p>{original}</p>
+          </div>
+         </div>
+         <div class="song-container">
+           <div class="song">
+             <p>{russian}</p>
+           </div>
+         </div>
+         <div class="song-container">
+          <div class="song-right">
+           <p>{interpret}</p>
+          </div>
+         </div>
+       </div>
+       <div class="row">
+         <div class="video">
+           <iframe width="100%" height="100%" src="{youtube}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
+       </div>
+       <div class="row">
+          <div class="details">
+            <h2>Справка (Details)</h2>
+            <p>{details}</p>
+          </div>
+       </div>
+  </body>
+</html>""")
+

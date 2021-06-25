@@ -2,10 +2,10 @@
 
 import os.path
 
-if os.path.isfile("page.html"):
-  os.remove("page.html")
+if os.path.isfile("index.html"):
+  os.remove("index.html")
 
-with open("page.html", "w") as html, open("plays.txt", 'r') as txt:
+with open("index.html", "w") as html, open("plays.txt", 'r') as txt:
   plays = txt.readlines()
   divslist = ""
 

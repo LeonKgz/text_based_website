@@ -2,10 +2,10 @@
 
 import os.path
 
-if os.path.isfile("song.html"):
-  os.remove("song.html")
+if os.path.isfile("index.html"):
+  os.remove("index.html")
 
-with open("song.html", "w") as html, open("original.txt", 'r') as origin, open("interpretation.txt", 'r') as interpret, open("youtube.txt", 'r') as youtube:
+with open("index.html", "w") as html, open("original.txt", 'r') as origin, open("interpretation.txt", 'r') as interpret, open("youtube.txt", 'r') as youtube, open("details.txt", 'r') as details:
 
   origin_title = origin.readline().strip()
   original = origin.readlines()[1:]
@@ -18,32 +18,48 @@ with open("song.html", "w") as html, open("original.txt", 'r') as origin, open("
 
   youtube = youtube.readline().strip()
 
-  html.write(f"""
-<!DOCTYPE html>
-<html lang=\'ru\'>
+  details = "".join(details.readlines())
+  prev_dir = os.getcwd().split("/")[-2]
+
+  html.write(f"""<!DOCTYPE html>
+<html lang='ru'>
   <head>
-    <title>{origin_title} ({interpret_title})</title>
-    <link rel=\"stylesheet\" href=\"../../../styles.css\">
-    <link rel=\"stylesheet\" href=\"../../txtstyle.css\">
+    <title>{origin_title} - {interpret_title}</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../txtstyle.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
   </head>
   <body>
-      <meta charset=utf-8>
-       <center>
-         <h1>{origin_title} ({interpret_title})</h1>
-       </center>
-       <div class="row">
-         <div class="song">
-           <p>{original}</p>
-         </div>
-         <div class="song">
-           <p>{interpret}</p>
-         </div>
-       </div>
-       <div class="row">
-         <div class="video">
-           <iframe width="840" height="447" src="{youtube}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         </div>
-       </div>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <a href="https://albenz.xyz/songs/{prev_dir}">Go Back</a>
+    <center>
+      <h1>{origin_title} - {interpret_title}</h1>
+    </center>
+    <div class="row">
+      <div class="column">
+        <div class="row">
+          <div class="song-container">
+            <h2>Оригинал - Original</h2>
+            <div class="p-left">{original}</div>
+          </div>
+          <div class="song-container">
+            <h2>Перевод - Interpretation</h2>
+            <div class="p-right">{interpret}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="video">
+            <iframe width="100%" height="100%" src="{youtube}" frameborder="0" allow="accelerometer; autoplay; clipboard-write;     encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="details">
+          <h2>Справка - Details</h2>
+          <p>{details}</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>""")
-

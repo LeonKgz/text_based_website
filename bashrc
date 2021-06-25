@@ -59,6 +59,7 @@ function newsong () {
   echo $song >> original.txt
   touch youtube.txt
   echo $link >> youtube.txt
+  touch details.txt
   parse_song
   cd ..
   if [ "$new_artist" = "y" ]; then
@@ -85,3 +86,28 @@ function gtsnc () {
   cp ~/.vimrc ./vimrc
   cp ~/.bashrc ./bashrc
 }
+
+function vimbin () {
+  vim ~/../bin/$1
+}
+
+# Looping through subdirectories and running scripts
+# for dir in ~/projects/git/*; do (cd "$dir" && git pull); done
+
+# added by travis gem
+[ ! -s /root/.travis/travis.sh ] || source /root/.travis/travis.sh
+
+function epic () {
+  mvn test
+  git add *.java
+  git commit -m "test"
+  git push
+}
+
+function hlog () {
+  heroku logs --tail -a evening-dawn-40045
+}
+
+alias parse_all_artists_songs='for d in ./*/ ; do (cd "$d" && parse_all_songs); done'
+
+alias reparse_all_songs='for d in ./*/ ; do (cd "$d" && (for d in ./*/ ; do (cd "$d" && parse_song); done)); done'

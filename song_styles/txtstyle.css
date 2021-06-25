@@ -1,0 +1,115 @@
+.card{
+  width: max-content;
+}
+
+h2 {
+  white-space: nowrap;
+}
+
+.p-left {
+	text-align: right;
+	white-space:pre;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.p-right {
+	text-align: left;
+	white-space:pre;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+p {
+	text-align: left;
+	white-space:pre;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.details {
+  transition: 0.0s;
+  padding-bottom: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.song-container {
+  width: 50%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+}
+
+.song-left {
+  padding-bottom: 3%;
+  padding-top: 3%;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin-right: 3%;
+  margin-left: 3%;
+  display: inline-block;
+  float: right;
+}
+
+.song-right {
+  padding-bottom: 3%;
+  padding-top: 3%;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin-right: 3%;
+  margin-left: 3%;
+  display: inline-block;
+  float: left;
+}
+
+.video {
+/*  box-shadow: 0 0 0px rgba(0,0,0,108);*/
+  margin: 2%;
+  padding: 0px 0px 0px 0px;
+  height: 30vh;
+  width: 57vh;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+  
+  .p-left {
+    text-align: right;
+    white-space:pre;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+  .p-right {
+    text-align: left;
+    white-space:pre;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .song-container {
+    width: 50%;
+    margin: 1px;
+    margin-bottom: 0px;
+    display: inline-block;
+  }
+
+  .video {
+  /*  box-shadow: 0 0 0px rgba(0,0,0,108);*/
+    margin: 2%;
+    padding: 0px 0px 0px 0px;
+    height: 110px;
+    width: 410px;
+    height: 20vh;
+    width: 36vh;
+  }
+
+  .details {
+    font-size: 10px;
+  }
+ 
+
+}
+
+
+

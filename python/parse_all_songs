@@ -2,10 +2,10 @@
 
 import os.path
 
-if os.path.isfile("page.html"):
-  os.remove("page.html")
+if os.path.isfile("index.html"):
+  os.remove("index.html")
 
-with open("page.html", "w") as html, open("allsongs.txt", 'r') as txt:
+with open("index.html", "w") as html, open("allsongs.txt", 'r') as txt:
   artist = txt.readline().strip()
   
   songs = txt.readlines()[1:]
@@ -30,7 +30,7 @@ with open("page.html", "w") as html, open("allsongs.txt", 'r') as txt:
         print ("Successfully created the directory %s " % song_dir)
 
     divslist += f"""
-  <div class="card" onclick="location.href='{song_dir}/song.html';" style="cursor: pointer;">
+  <div class="card" onclick="location.href='{song_dir}/';" style="cursor: pointer;">
     <h2>{song}</h2>
     <h3>{song_in_english}</h3>
   </div>\n"""
@@ -48,6 +48,7 @@ with open("page.html", "w") as html, open("allsongs.txt", 'r') as txt:
   </head>
   <body>
       <meta charset=utf-8>
+       <a href="https://albenz.xyz/songs/allartists/">Go Back</a>
        <center>
          <h1>{artist}</h1>
        </center>

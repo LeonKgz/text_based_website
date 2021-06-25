@@ -18,6 +18,7 @@ set nosol
 :au BufWritePost original.txt :silent exec "!parse_song"
 :au BufWritePost interpretation.txt :silent exec "!parse_song"
 :au BufWritePost youtube.txt :silent exec "!parse_song"
+:au BufWritePost details.txt :silent exec "!parse_song"
 
 :au BufWritePost artists.txt :silent exec "!parse_artists"
 :au BufWritePost allsongs.txt :silent exec "!parse_all_songs"
